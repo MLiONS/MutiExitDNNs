@@ -2,7 +2,7 @@ import logging
 import os
 import csv
 import sys
-sys.path.append('/content/ElasticBERT')
+sys.path.append('/content/MutiExitDNNs/ElasticBERT')
 sys.path.append('../')
 
 import numpy as np
