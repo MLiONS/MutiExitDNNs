@@ -2,7 +2,7 @@ export ELUE_DIR=/content/drive/MyDrive/elue_data
 export TASK_NAME=SST-2
 export CUDA_VISIBLE_DEVICES=0
 
-python /content/ElasticBERT/finetune-dynamic/run_elue_entropy.py \
+python /content/MutiExitDNNs/ElasticBERT/finetune-dynamic/run_elue_entropy.py \
   --model_name_or_path fnlp/elasticbert-base \
   --task_name $TASK_NAME \
   --do_train \
