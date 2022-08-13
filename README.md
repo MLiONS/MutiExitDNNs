@@ -20,6 +20,6 @@ Part-2:  Evaluate UEE-UCB algorithm using the prediction matrix from Part-1.
 [**IMDb dataset**](https://web.archive.org/web/20220401065200/https://s3.amazonaws.com/fast-ai-nlp/imdb.tgz) and
 [**Yelp dataset**](https://web.archive.org/web/20220401065200/https://s3.amazonaws.com/fast-ai-nlp/yelp_review_polarity_csv.tgz).
 
-## Acknowledgements
+## Acknowledgement
 
 Training the multi-exit model ( Part-1) is mostly based on [**ElasticBERT**](https://github.com/fastnlp/ElasticBERT), we thank the authors for the codebase.
