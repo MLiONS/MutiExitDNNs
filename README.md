@@ -7,7 +7,7 @@ This repository contains code to perform the experiments conducted in the paper:
 The experimental section can be divided into two parts:
 
 Part-1:  Train a particular multi-exit model (with a certain exit configuration- EC-1/ EC-2/ EC-3 or others) on SST-2 dataset and generate
-the prediction matrix (all exit predictions, *num_samples*  *X*  *num_exits* ) for IMDb/ Yelp dataset using the trained model.
+the prediction matrix [all exit predictions for all samples(*num_samples*  *X*  *num_exits*) plus true labels as the last column] for IMDb/ Yelp dataset using the trained model.
 
 Part-2:  Evaluate UEE-UCB algorithm using the prediction matrix from Part-1.
 
