@@ -45,16 +45,10 @@ def load_and_cache_examples_glue(args, task, tokenizer, data_type="train"):
 
         
         if data_type == "train":
-          if args.eval_spec:
-            examples = processor.get_train_examples(args.data_dir, args)
-          else:
-            examples = processor.get_train_examples(args.data_dir)   
+            examples = processor.get_train_examples(args.data_dir)
         elif data_type == "dev":
             examples = processor.get_dev_examples(args.data_dir)
         elif data_type == "test":
-          if args.eval_spec:
-            examples = processor.get_test_examples(args.data_dir, args)
-          else:
             examples = processor.get_test_examples(args.data_dir)
         else:
             raise NotImplementedError
@@ -99,7 +93,7 @@ def load_and_cache_examples_elue(args, task, tokenizer, data_type="train"):
 
     #We shall use IMDb processor for both the datasets( IMDb and Yelp)
     if args.eval_spec and task!='sst-2':
-      task='IMDb'
+      task='imdb'
     
     processor = elue_processors[task]()
     output_mode = elue_output_modes[task]
@@ -121,13 +115,19 @@ def load_and_cache_examples_elue(args, task, tokenizer, data_type="train"):
         label_list = processor.get_labels()
 
         if data_type == "train":
-            examples = processor.get_train_examples(args.data_dir)
+          if args.eval_spec:
+            examples = processor.get_train_examples(args.data_dir, args)
+          else:
+            examples = processor.get_train_examples(args.data_dir)   
         elif data_type == "dev":
             examples = processor.get_dev_examples(args.data_dir)
         elif data_type == "test":
+          if args.eval_spec:
+            examples = processor.get_test_examples(args.data_dir, args)
+          else:
             examples = processor.get_test_examples(args.data_dir)
         else:
-            raise NotImplementedError
+            raise NotImplementedError 
 
         features = elue_convert_examples_to_features(
             examples,
