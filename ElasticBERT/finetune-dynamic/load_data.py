@@ -112,7 +112,10 @@ def load_and_cache_examples_elue(args, task, tokenizer, data_type="train"):
         features = torch.load(cached_features_file)
     else:
         logger.info("Creating features from dataset file at %s", args.data_dir)
-        label_list = processor.get_labels()
+        if args.eval_spec and task!='sst-2':
+          label_list = processor.get_labels(args)
+        else:
+          label_list = processor.get_labels()
 
         if data_type == "train":
           if args.eval_spec:
