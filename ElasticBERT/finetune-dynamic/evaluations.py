@@ -380,7 +380,10 @@ def evaluate_elue_entropy(args, model, tokenizer, prefix="", eval_highway=False,
     for i in range(sum(num_op_layers)):
         results_all.append({})
 
-    eval_dataset = load_and_cache_examples_elue(args, eval_task, tokenizer, data_type='dev')
+    if args.spec_eval:
+      eval_dataset = load_and_cache_examples_elue(args, eval_task, tokenizer, data_type=args.spec_eval)
+    else:
+      eval_dataset = load_and_cache_examples_elue(args, eval_task, tokenizer, data_type='dev')
 
     if not os.path.exists(eval_output_dir) and args.local_rank in [-1, 0]:
         os.makedirs(eval_output_dir)
@@ -473,5 +476,8 @@ def evaluate_elue_entropy(args, model, tokenizer, prefix="", eval_highway=False,
         speed_up = model.elasticbert.log_stats()
         return results, speed_up, exit_layer
 
+    if args.spec_eval:
+      return results_all, preds_all, out_label_ids
+    
     return results_all
     #return results_all, preds_all, out_label_ids
