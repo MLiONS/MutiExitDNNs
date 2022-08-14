@@ -92,7 +92,7 @@ def load_and_cache_examples_elue(args, task, tokenizer, data_type="train"):
         torch.distributed.barrier()  # Make sure only the first process in distributed training process the dataset, and the others will use the cache
 
     #We shall use IMDb processor for both the datasets( IMDb and Yelp)
-    if args.eval_spec and task!='sst-2':
+    if args.spec_eval and task!='sst-2':
       task='imdb'
     
     processor = elue_processors[task]()
@@ -112,20 +112,20 @@ def load_and_cache_examples_elue(args, task, tokenizer, data_type="train"):
         features = torch.load(cached_features_file)
     else:
         logger.info("Creating features from dataset file at %s", args.data_dir)
-        if args.eval_spec and task!='sst-2':
+        if args.spec_eval and task!='sst-2':
           label_list = processor.get_labels(args)
         else:
           label_list = processor.get_labels()
 
         if data_type == "train":
-          if args.eval_spec:
+          if args.spec_eval:
             examples = processor.get_train_examples(args.data_dir, args)
           else:
             examples = processor.get_train_examples(args.data_dir)   
         elif data_type == "dev":
             examples = processor.get_dev_examples(args.data_dir)
         elif data_type == "test":
-          if args.eval_spec:
+          if args.spec_eval:
             examples = processor.get_test_examples(args.data_dir, args)
           else:
             examples = processor.get_test_examples(args.data_dir)
