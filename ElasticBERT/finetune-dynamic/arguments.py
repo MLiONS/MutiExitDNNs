@@ -56,6 +56,13 @@ def get_args():
         help="The output directory where the logs will be written.",
     )
     parser.add_argument(
+        "--spec_eval",
+        default=None,
+        type=str,
+        required=False,
+        help="'Set as train or test based on specific split on which to evaluate'"
+    )
+    parser.add_argument(
         "--patience",
         default='0',
         type=str,
