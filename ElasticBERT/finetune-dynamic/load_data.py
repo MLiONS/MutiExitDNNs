@@ -43,11 +43,18 @@ def load_and_cache_examples_glue(args, task, tokenizer, data_type="train"):
         logger.info("Creating features from dataset file at %s", args.data_dir)
         label_list = processor.get_labels()
 
+        
         if data_type == "train":
-            examples = processor.get_train_examples(args.data_dir)
+          if args.eval_spec:
+            examples = processor.get_train_examples(args.data_dir, args)
+          else:
+            examples = processor.get_train_examples(args.data_dir)   
         elif data_type == "dev":
             examples = processor.get_dev_examples(args.data_dir)
         elif data_type == "test":
+          if args.eval_spec:
+            examples = processor.get_test_examples(args.data_dir, args)
+          else:
             examples = processor.get_test_examples(args.data_dir)
         else:
             raise NotImplementedError
