@@ -16,9 +16,11 @@ Part-2:  Evaluate UEE-UCB algorithm using the prediction matrix from Part-1.
 1) All the multi-exit ElasticBERT models are trained and evaluated on SST-2 dataset available at:
 [**SST-2 dataset**](http://eluebenchmark.fastnlp.top/#/task?taskId=3).
 
-2) The final trained models are evaluated on IMDb and Yelp datasets which can be accessed from:
-[**IMDb dataset**](https://web.archive.org/web/20220401065200/https://s3.amazonaws.com/fast-ai-nlp/imdb.tgz) and
-[**Yelp dataset**](https://web.archive.org/web/20220401065200/https://s3.amazonaws.com/fast-ai-nlp/yelp_review_polarity_csv.tgz).
+2) The final trained models are evaluated on IMDb and Yelp datasets.
+
+a) Running "Create_IMDb_tsv_files" will create the required tsv files for IMDb dataset.
+
+b) Yelp dataset access: [**Yelp dataset**](https://web.archive.org/web/20220401065200/https://s3.amazonaws.com/fast-ai-nlp/yelp_review_polarity_csv.tgz).
 
 ## Acknowledgement
 
