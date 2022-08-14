@@ -220,7 +220,7 @@ class ImdbProcessor(DataProcessor):
         """See base class."""
         if args.task_name == 'imdb':
           return self._create_examples(self._read_tsv(os.path.join(data_dir, "train.tsv")), "train", args)
-        elif args.task_name = 'yelp' :
+        elif args.task_name == 'yelp' :
           return self._create_examples(self.yelp_read_tsv(os.path.join(data_dir, "train.csv")), "train", args)
 
     def get_dev_examples(self, data_dir):
@@ -231,7 +231,7 @@ class ImdbProcessor(DataProcessor):
         """See base class."""
         if args.task_name == 'imdb':
           return self._create_examples(self._read_tsv(os.path.join(data_dir, "test.tsv")), "test", args)
-        elif args.task_name = 'yelp' :
+        elif args.task_name == 'yelp' :
           return self._create_examples(self.yelp_read_tsv(os.path.join(data_dir, "test.csv")), "test", args)
 
     def get_labels(self, args):
