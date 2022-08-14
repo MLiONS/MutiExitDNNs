@@ -216,34 +216,53 @@ class ImdbProcessor(DataProcessor):
             str(tensor_dict["label"].numpy()),
         )
 
-    def get_train_examples(self, data_dir):
+    def get_train_examples(self, data_dir, args):
         """See base class."""
-        return self._create_examples(self._read_tsv(os.path.join(data_dir, "train.tsv")), "train")
+        if args.task_name == 'imdb':
+          return self._create_examples(self._read_tsv(os.path.join(data_dir, "train.tsv")), "train", args)
+        elif args.task_name = 'yelp' :
+          return self._create_examples(self.yelp_read_tsv(os.path.join(data_dir, "train.csv")), "train", args)
 
     def get_dev_examples(self, data_dir):
         """See base class."""
         return self._create_examples(self._read_tsv(os.path.join(data_dir, "dev.tsv")), "dev")
 
-    def get_test_examples(self, data_dir):
+    def get_test_examples(self, data_dir, args):
         """See base class."""
-        return self._create_examples(self._read_tsv(os.path.join(data_dir, "test.tsv")), "test")
+        if args.task_name == 'imdb':
+          return self._create_examples(self._read_tsv(os.path.join(data_dir, "test.tsv")), "test", args)
+        elif args.task_name = 'yelp' :
+          return self._create_examples(self.yelp_read_tsv(os.path.join(data_dir, "test.csv")), "test", args)
 
-    def get_labels(self):
+    def get_labels(self, args):
         """See base class."""
-        return ["0", "1"]
+        if args.task_name == 'imdb':
+            return ["0", "1"]
+        elif args.task_name == 'yelp':
+            return ['"1"', '"2"']
+        
 
-    def _create_examples(self, lines, set_type):
+    def _create_examples(self, lines, set_type, args):
         """Creates examples for the training, dev and test sets."""
         examples = []
-        text_index = 1 if set_type == "test" else 0
+        if args.task_name == 'imdb':
+            text_index = 2 #if set_type == "test" else 0
+        elif args.task_name == 'yelp':
+            text_index = 1 #if set_type == "test" else 0
+        
         for (i, line) in enumerate(lines):
             if i == 0:
                 continue
             guid = f"{set_type}-{i}"
             text_a = line[text_index]
-            label = None if set_type == "test" else line[1]
+            label = line[0] if args.task_name == 'imdb' else line[1]
             examples.append(InputExample(guid=guid, text_a=text_a, text_b=None, label=label))
         return examples
+    
+    def yelp_read_tsv(cls, input_file, quotechar=None):
+        """Reads a tab separated value file."""
+        with open(input_file, "r", encoding="utf-8-sig") as f:
+            return list(csv.reader(f, quotechar=quotechar))
 
 
 class StsbProcessor(DataProcessor):
