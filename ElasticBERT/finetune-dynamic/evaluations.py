@@ -457,6 +457,8 @@ def evaluate_elue_entropy(args, model, tokenizer, prefix="", eval_highway=False,
 
     if not eval_highway:
         for i, pred in enumerate(preds_all):
+            if eval_task == 'yelp':
+              eval_task = 'imdb'     
             result = elue_compute_metrics(eval_task, pred, out_label_ids)
             results_all[i].update(result)
 
