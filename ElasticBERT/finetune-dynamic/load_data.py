@@ -152,7 +152,7 @@ def load_and_cache_examples_elue(args, task, tokenizer, data_type="train"):
 
     all_token_type_ids = torch.tensor([f.token_type_ids for f in features], dtype=torch.long)
     all_labels = None
-    if data_type != "test":
+    if data_type :  #!= "test"
         if output_mode == "classification":
             all_labels = torch.tensor([f.label for f in features], dtype=torch.long)
         elif output_mode == "regression":
