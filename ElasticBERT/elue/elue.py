@@ -3,6 +3,7 @@
 import os
 from enum import Enum
 from typing import List, Optional, Union
+import csv
 
 from transformers.file_utils import is_tf_available
 from transformers.tokenization_utils import PreTrainedTokenizer
@@ -252,10 +253,11 @@ class ImdbProcessor(DataProcessor):
         
         for (i, line) in enumerate(lines):
             if i == 0:
-                continue
+                if args.task_name == 'imdb':
+                    continue
             guid = f"{set_type}-{i}"
             text_a = line[text_index]
-            label = line[0] if args.task_name == 'imdb' else line[1]
+            label = line[1] if args.task_name == 'imdb' else line[0]
             examples.append(InputExample(guid=guid, text_a=text_a, text_b=None, label=label))
         return examples
     
